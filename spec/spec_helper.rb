@@ -7,6 +7,7 @@ require 'rspec/rails'
 require 'email_spec'
 require 'rspec/autorun'
 require 'webmock/rspec'
+require 'request_helper'
 
 Spork.prefork do
   # Requires supporting ruby files with custom matchers and macros, etc,
