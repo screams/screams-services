@@ -57,3 +57,6 @@ group :test do
 end
 
 gem 'awesome_print'
+
+# For env variables to be read from application yml
+gem 'figaro'
