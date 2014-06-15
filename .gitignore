@@ -15,8 +15,5 @@
 /log/*.log
 /tmp
 
-# Ignore database configuration file
-config/database.yml
-
-# Ignore environment/machine specific config
-config/application.yml
+# Ignore database configuration 
+/config/database.yml
