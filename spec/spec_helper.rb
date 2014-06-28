@@ -5,7 +5,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'spork'
 require 'rspec/rails'
 require 'email_spec'
-require 'rspec/autorun'
+# require 'rspec/autorun'
 require 'webmock/rspec'
 require 'request_helper'
 
