@@ -8,5 +8,6 @@ FactoryGirl.define do
 
   factory :user do
     email { FactoryGirl.generate(:user_email) }
+    password "Password!123"
   end
 end
