@@ -47,6 +47,7 @@ gem 'debugger', group: [:development, :test]
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
 end
 
 group :test do
