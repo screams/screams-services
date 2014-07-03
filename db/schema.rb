@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628100207) do
+ActiveRecord::Schema.define(version: 20140703140003) do
+
+  create_table "authentication_tokens", force: true do |t|
+    t.string   "authentication_token"
+    t.boolean  "expires",              default: false
+    t.datetime "expires_at",           default: '2014-07-03 14:05:13'
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "screams", force: true do |t|
+    t.text     "text"
+    t.boolean  "private_scream", default: false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email"

@@ -31,4 +31,11 @@ describe User do
       it { should allow_value('t-someV12one@sub.domain.in').for(:email) }
     end
   end
+
+  describe "Assosciations" do
+    subject { FactoryGirl.build(:user) }
+
+    it { should have_many(:screams) }
+    it { should have_many(:authentication_tokens) }
+  end
 end

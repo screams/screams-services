@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
             :presence => true,
             :uniqueness => true
 
+  has_many :screams
+  has_many :authentication_tokens
+
 
   def authentication_token
     "12323342543252435425"  

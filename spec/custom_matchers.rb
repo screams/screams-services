@@ -25,3 +25,11 @@ RSpec::Matchers.define :have_empty do |key|
     json[key].nil? or json[key].empty?
   end
 end
+
+RSpec::Matchers.define :be_a_json_of do |to_be_record|
+  match do |actual_json|
+    actual_hash = actual_json.symbolize_keys!.except!(:created_at, :updated_at)
+    to_be_hash = to_be_record.as_json.symbolize_keys!.except!(:created_at, :updated_at)
+    to_be_hash == actual_hash
+  end
+end

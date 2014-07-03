@@ -14,6 +14,7 @@ Screams::Application.routes.draw do
   }
   namespace :v1 do 
     resources :users
+    resources :screams
   end
 
   # Example of regular route:
