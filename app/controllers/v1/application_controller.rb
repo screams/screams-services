@@ -4,6 +4,10 @@ module V1
     # For APIs, you may want to use :null_session instead.
     protect_from_forgery with: :exception
 
+    def current_user
+      ::User.find_by_encrytped_authentication_token(params[:authentication_token])
+    end
+
   private
     def respond_with_CRUD_json_response(object, options = {})
       errors_present = object.errors.present?

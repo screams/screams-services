@@ -4,7 +4,7 @@ class V1::User::RegistrationsController < Devise::RegistrationsController
     user = User.new(user_params)
     user.save
     respond_with_CRUD_json_response(user, :json_options => {
-      :methods => [:authentication_token]
+      :methods => [:encrypted_authentication_token]
     })
   end
 

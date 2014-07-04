@@ -14,9 +14,9 @@
 ActiveRecord::Schema.define(version: 20140703140003) do
 
   create_table "authentication_tokens", force: true do |t|
-    t.string   "authentication_token"
-    t.boolean  "expires",              default: false
-    t.datetime "expires_at",           default: '2014-07-03 14:05:13'
+    t.string   "token"
+    t.boolean  "expires",      default: false
+    t.datetime "generated_at", default: '2014-07-04 03:09:01'
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

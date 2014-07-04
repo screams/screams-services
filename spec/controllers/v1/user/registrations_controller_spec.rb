@@ -12,6 +12,11 @@ describe V1::User::RegistrationsController, :type => :controller do
 
   describe "POST 'create'" do
     context "when there are no validation errors" do
+      before(:each) {
+        @stubbed_token_response = 'MyMercyToken'
+        User.any_instance.stub(:generate_authentication_token)
+          .and_return(@stubbed_token_response) 
+      }
       it "should return the success response and user hash along with authentication_token" do
         to_create_email = 'this@gmail.com'
         post 'create', :user => {
@@ -23,7 +28,8 @@ describe V1::User::RegistrationsController, :type => :controller do
         expect(parsed_response).to be_a_success_response
         expect(parsed_response).to_not have_errors
         expect(parsed_response["user"]["email"]).to be_eql(to_create_email)
-        expect(parsed_response["user"]["authentication_token"]).to_not be_nil
+        expect(parsed_response["user"]["encrypted_authentication_token"]).to_not be_nil
+        expect(parsed_response["user"]["encrypted_authentication_token"]).to be_eql(@stubbed_token_response)
         expect(User.where(:email => to_create_email)).to have(1).record
       end
     end

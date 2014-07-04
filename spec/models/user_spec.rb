@@ -38,4 +38,64 @@ describe User do
     it { should have_many(:screams) }
     it { should have_many(:authentication_tokens) }
   end
+
+  describe "#generate_authentication_token" do
+    context "when there is an existing authentication token with the same hash" do
+      let(:auth_token) {
+        FactoryGirl.create(:authentication_token)
+      }   
+      let(:user){
+        FactoryGirl.create(:user)
+      }
+         
+      before(:each) do
+        OpenSSL::HMAC.any_instance.stub(:hexdigest) do
+          OpenSSL::HMAC.unstub(:hexdigest)
+          auth_token.token
+        end   
+      end
+      
+      it "should generate a authentication_token with a new hash and return encrypted auth token" do
+        enc = user.generate_authentication_token
+        expect(user.reload.authentication_tokens).to have(1).record
+        expect(Devise.token_generator.digest(AuthenticationToken, :token, enc))
+          .to be_eql(user.reload.authentication_tokens.first.token)
+      end
+    end
+
+    context "when there are not authentication tokens with the hash that is generated" do
+      let(:user){
+        FactoryGirl.create(:user)
+      }
+
+      it "should generate a authentication_token and return encrypted auth token" do
+        enc = user.generate_authentication_token
+        expect(user.reload.authentication_tokens).to have(1).record
+        expect(Devise.token_generator.digest(AuthenticationToken, :token, enc))
+          .to be_eql(user.reload.authentication_tokens.first.token)
+      end
+    end
+  end
+  
+  describe ".find_by_encrytped_authentication_token" do  
+    context "when a user with authentication token is present" do
+      let(:user){
+        FactoryGirl.create(:user)
+      }
+      before(:each){
+        @enc = user.generate_authentication_token
+      }
+
+      it 'should return user' do
+        user_from_find = User.find_by_encrytped_authentication_token(@enc)
+        user_from_find.should be_eql(user)
+      end
+    end
+
+    context "when a authentication_token is not present with the given token" do
+      it "should return nil" do
+        User.find_by_encrytped_authentication_token('MyMercy').should be_nil
+      end
+    end
+  end
 end
