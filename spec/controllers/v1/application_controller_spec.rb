@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'request_helper'
 
 describe V1::ApplicationController, :type => :controller do
-
   describe "#current_user" do
     context 'when the authentication_token is sent in params' do
       context "when a user with the token present" do
