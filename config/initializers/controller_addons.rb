@@ -1,0 +1,1 @@
+require 'controller_addons/response_addons'
