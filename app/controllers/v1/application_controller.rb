@@ -30,7 +30,7 @@ module V1
         "#{object.class.name.underscore}"           => failure ? nil : object
       }
       options.symbolize_keys
-      resp.merge!({ :redirect_uri => redirect_uri }) if options[:redirect_uri].present?
+      resp.merge!({ :redirect_uri => options[:redirect_uri] }) if options[:redirect_uri].present?
       resp.merge!({ :errors => error_messages }) if errors_present
       render :json => resp
     end
