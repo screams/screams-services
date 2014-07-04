@@ -1,7 +1,5 @@
 module V1
-  class ScreamsController < V1::ApplicationController
-    
-    # before_filter :authenticate_user
+  class ScreamsController < V1::ApplicationController  
 
     def create
       scream = Scream.create(scream_params)

@@ -64,3 +64,5 @@ gem 'figaro'
 
 # For user authentication
 gem 'devise'
+
+gem 'cancan'
